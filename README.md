@@ -10,6 +10,8 @@ DGD has [some unusual characteristics](dgd/unusual.md) that can be very powerful
 
 It also has a [long and storied history](dgd/history.md).
 
+Here's [how to install DGD](dgd/installing.md).
+
 ## ChatTheatre Resources
 
 This is one of several documentation sites courtesy of [ChatTheatre](https://chattheatre.com), which aims to make DGD more straightforward to install and use.
