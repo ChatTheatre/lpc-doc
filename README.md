@@ -10,7 +10,21 @@ DGD has [some unusual characteristics](dgd/unusual.md) that can be very powerful
 
 It also has a [long and storied history](dgd/history.md).
 
+## Installing
+
 Here's [how to install DGD](dgd/installing.md).
+
+When running DGD, see also:
+
+* [DGD's Configuration File](dgd/config_file.md)
+
+## Using DGD
+
+You may wish to use the [Kernellib](https://ChatTheatre.github.io/kernellib-doc) when writing a new DGD application and your existing applications may use it, as SkotOS and eOS do.
+
+* [Error handling in DGD](dgd/errors.md)
+* [Objects in DGD](dgd/objects.md)
+* [Functions in DGD](dgd/functions.md)
 
 ## ChatTheatre Resources
 
