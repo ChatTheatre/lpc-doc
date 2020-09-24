@@ -1,25 +1,24 @@
-   The server uses the same overall design as the LP server made by
-Lars Pensjö.  However, there are several important differences:
-it uses less memory because it is disk-based; it can dump state and later
-restart from a snapshot; it uses LPC as an internal interpreted language,
-but also offers the option of precompiling LPC objects to C, making them
-part of the program itself.
-   There are two special objects which determine the interface with the 
-server for all other objects: the auto object and the driver object.
-   The auto object (short for automatically inherited object) is
-inherited by all other objects, except for the driver object.  It can
-redeclare the predefined functions (called kfuns, kernel functions)
+There are two special objects which determine the interface between DGD's 
+server and all other objects: the auto object and the driver object.
+
+The auto object (short for automatically inherited object) is
+inherited by all other objects, except for the driver object. It can
+redeclare the predefined functions (called kfuns, or kernel functions)
 that the server provides, and it can also define standard properties that
-every object should have.  Some kfuns <have> to be redeclared in an
+every object should have. Some kfuns ***have*** to be redeclared in an
 environment with several users programming together; for instance, by
 default there is no file security.
+
 The auto object has some other special properties; static functions
 declared in the auto object cannot be called using this_object()->func()
 (i.e. they behave like kfuns).
-   The driver object defines several functions which are called by the
+
+The driver object defines several functions which are called by the
 driver, mostly to translate pathnames.
-   The following functions will be called by the driver:
- - in the driver object:
+
+The following functions will be called by the driver:
+
+## In the driver object:
 
     void initialize()
 
@@ -153,7 +152,7 @@ driver, mostly to translate pathnames.
 	available with status(obj), which can help distinguishing between
 	different issues of the same object.
 
- - in every object:
+## In every object:
 
     void create()
 
@@ -161,8 +160,7 @@ driver, mostly to translate pathnames.
 	clone, just before a function is called in it for the first time.
 	The actual name of this function is configurable.
 
- - in the user object (created by connect(), or returned by
-   driver->telnet_connect() or driver->binary_connect()):
+## In the user object (created by connect(), or returned by driver->telnet_connect() or driver->binary_connect()):
 
     int open()
 
@@ -206,86 +204,10 @@ driver, mostly to translate pathnames.
 	This function is called when a packet is received on the datagram
 	channel of the connection.
 
- - in an object where connect() has been called:
+## In an object where connect() has been called:
 
     void unconnected(int refused)
 
 	Called when an outbound connection failed to be established.  The
 	flag argument is 1 when the connection was refused by the remote
 	host.
-
-
-   On startup, the system is configured with a configuration file, which
-must specify the following configuration parameters:
-
-param		type	meaning
---------------------------------------------------------------------------
-telnet_port	mapping	A mapping containing host:port pairs, where the host
-		  or	string is a name, an IP number or "*", and the port
-		number	number is a port on which to accept telnet connections.
-			Alternatively, a telnet port number.
-binary_port	mapping	A mapping containing host:port pairs, where the host
-		  or	string is a name, an IP number or "*", and the port
-		number	number is a port on which to accept raw TCP/IP
-			connections.  Alternatively, a binary port number.
-datagram_port	mapping	A mapping containing host:port pairs, where the host
-		  or	string is a name, an IP number or "*", and the port
-		number	number is a port on which to accept datagram
-			connections.  Alternatively, a datagram port number.
-			(optional)
-directory	string	The base directory for the system.
-modules		mapping	A mapping containing module:config pairs, where the 
-			module string is the path of a runtime extension
-			module, and the config string is used to initialize it.
-			(optional)
-users		number	The maximum number of active telnet and binary
-			connections.
-datagram_users	number	The maximum number of active datagram connections.
-			(optional)
-editors		number	The maximum number of simultaneously active
-			editor instances.
-ed_tmpfile	string	The proto editor temporary file (actual files
-			will have a number appended).
-swap_file	string	The name of the swap file.
-swap_size	number	The total number of sectors in the swap file.
-cache_size	number	The number of sectors in the swap cache in memory.
-sector_size	number	The size of a swap sector in bytes.
-swap_fragment	number	The fragment of all objects to swap out at the end of
-			each task (e.g. with a swap_fragment of 32, 1/32th
-			of all objects will be swapped out).
-static_chunk	number	The size in bytes of a static or dynamic chunk
-dynamic_chunk	number	of memory.  Memory is divided into static memory
-			and dynamic memory; static memory is never freed.
-			Both are allocated in chunks of the specified size.
-			Setting the size of the static chunk to 0 will
-			cause the system never to swap out everything to
-			make more room for static memory, but will also
-			increase fragmentation.
-dump_file	string	The name of the snapshot file.
-dump_interval	number	The expected interval between snapshots, in seconds.
-			Effectively, the time during which the swapfile will be
-			fully recreated.
-hotboot		string*	Program, with arguments, to execute during hotboot.
-			(optional)
-typechecking	number	If zero, only functions with a declared type are
-			typechecked.
-			If one, all LPC functions are typechecked.
-			If two, additionally, nil (the value of an uninitialized
-			string, object, array or mapping variable) is a value
-			distinct from integer 0.
-include_file	string	The standard include file, which is always
-			included automatically for each compiled object
-			(relative to the base directory).
-include_dirs	string*	The standard system include directories (relative
-			to the base directory).  In the first of those,
-			the include files which are automatically
-			generated on startup will be placed.
-auto_object	string	The file name of the auto object (relative to the
-			base directory).
-driver_object	string	The file name of the driver object (relative to
-			the base directory).
-create		string	The name of the create function.
-array_size	int	The maximum array and mapping size.
-objects		int	The maximum number of objects.
-call_outs	int	The maximum number of simultaneously active
-			callouts.
