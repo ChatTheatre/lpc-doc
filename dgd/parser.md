@@ -1,6 +1,9 @@
-			Parser reference manual
+---
+title: Parser Reference Manual
+layout: default
+---
 
-1. Introduction
+## 1. Introduction
 
 The parse_string() utility parses strings as follows: first, the string is
 broken up into two types of smaller strings, called "tokens" and "whitespace".
@@ -26,14 +29,14 @@ one used by the same object, any existing generated automatons are wiped out
 and constructed anew.
 
 
-2. Grammar
+## 2. Grammar
 
 A grammar consists of token rules and production rules, which may be given in
 any order.  Each grammar must contain at least one token rule and one
 production rule.
 
 
-2.1 Token rules
+## 2.1 Token rules
 
 A normal token rule has the following format:
 
@@ -78,7 +81,7 @@ where "nomatch" is literal text.  Nomatch rules can be very inefficient, and
 their use should be avoided if possible.
 
 
-2.2 Production rules
+## 2.2 Production rules
 
 A production rule has the following format:
 
@@ -93,7 +96,7 @@ directly, without reference to a token rule.  Since a token rule is implicitly
 generated for such string constants, the string constant is also said to be a
 token.  String constants take precedence over regular expressions, and any
 token that matches both a string constant and a regular expression will always
-match the string constant, only.  `\' may be used in a string constant to
+match the string constant, only.  \`\\' may be used in a string constant to
 escape the single quote.
 
 More than one production rule may be given for the same symbol.  All
@@ -111,7 +114,7 @@ where "function" is the name of an LPC function to be called in the current
 object if the specified rule has been matched.
 
 
-3. Parsing
+## 3. Parsing
 
 Normally, parse_string() returns a flat array of token strings (if the input
 string could be parsed as a sentence in the language defined by the grammar)
@@ -122,7 +125,7 @@ while parsing.  Moreover, if the grammar is ambiguous, sub-arrays for the
 alternative may be automatically included in the result.
 
 
-3.1 LPC functions
+## 3.1 LPC functions
 
 An LPC function called for a production rule will have a single argument,
 an array with the parse tree that matches the production rule.  LPC functions
@@ -140,7 +143,7 @@ their semantic value, or to add structure to a parse tree, which otherwise
 would be represented as a flat array.
 
 
-3.2 Ambiguous grammars
+## 3.2 Ambiguous grammars
 
 A grammar that allows more than one parse tree for the same input string is
 said to be "ambiguous".  The string parser will sort alternative parse trees
@@ -159,7 +162,7 @@ LPC functions called for rules can be used to invalidate alternative parse
 trees.  Invalidated alternatives will be removed from the overall result.
 
 
-3.3 Writing grammars
+## 3.3 Writing grammars
 
 Grammars can be parsed most efficiently if they are not ambiguous.  Generally,
 ambiguous grammars can be rewritten to be non-ambiguous.  For example,

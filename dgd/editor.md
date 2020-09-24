@@ -1,11 +1,17 @@
-			    editor reference guide
+---
+title: Editor Reference
+layout: default
+---
 
+(Note: [quick reference](./ed-quickref.html))
 
+<pre>
    The editor is line oriented.  It has two different modes, Command Mode and
 Insert Mode.  In Command Mode, commands may be given that affect a range of
 lines in the main buffer.  In Insert Mode, new lines may be added to the main
 buffer.  Apart from the main buffer, lines may be copied to and from 26
 secondary buffers.
+
    The editor remembers the current line and at most 26 marked lines in the
 main buffer, and has some status-affecting variables which can be changed by the
 user.
@@ -28,29 +34,29 @@ usually be displayed.  The most general format of commands is as follows:
 
    address1 , address2 command ! parameters count flags
 
-   <address1> and <address2> specify the first and last line of a range of lines
+   &lt;address1&gt; and &lt;address2&gt; specify the first and last line of a range of lines
 that are to be affected by the command.  If no second line address is given,
-the range is assumed to be <address1, address1>.  If no line range is specified
+the range is assumed to be &lt;address1, address1&gt;.  If no line range is specified
 at all, a default range is assumed, usually just the current line.
-   <command> is a string of letters or non-digits.
-   <!> may be given with some commands to specify a different, but similar
+   &lt;command&gt; is a string of letters or non-digits.
+   &lt;!&gt; may be given with some commands to specify a different, but similar
 operation.
-   Some commands require <parameters>.
-   A <count> may be given with many commands to specify the number of lines
+   Some commands require &lt;parameters&gt;.
+   A &lt;count&gt; may be given with many commands to specify the number of lines
 that is to be affected by the command, as an alternative to specifying the
-first and last line.  A <count> will always override <address2>, if given.
-   Finally, <flags> may be given to affect the way in which the new current
+first and last line.  A &lt;count&gt; will always override &lt;address2&gt;, if given.
+   Finally, &lt;flags&gt; may be given to affect the way in which the new current
 line is displayed after the command has been executed.
 
    All parts are optional, even the command itself may be omitted.  A range of
 lines without a following command will print the lines specified.  A single
-<address> will set the current line to <address>, and the 'empty command' will
+&lt;address&gt; will set the current line to &lt;address&gt;, and the 'empty command' will
 set the current line to the next line.
 
 
    2.1 Line addressing
 
-   An <address> specifies a line in the main buffer.  It may be a number, '.'
+   An &lt;address&gt; specifies a line in the main buffer.  It may be a number, '.'
 or '$', a regular expression, a marked line, or an expression containing one of
 the previous and an offset.  The most general format is:
 
@@ -68,20 +74,20 @@ omitted.
    A marked line is specified by a single quote "'", followed by a lowercase
 letter.  The mark must have been set by the 'mark' command.
 
-   Offsets may be given to a given <address> using '+' and '-', followed by
-a number.  If the '+' or '-' sign is not preceded by an <address>, the current
+   Offsets may be given to a given &lt;address&gt; using '+' and '-', followed by
+a number.  If the '+' or '-' sign is not preceded by an &lt;address&gt;, the current
 line is assumed.  If the '+' or '-' sign is not followed by a number, the number
 1 is assumed.  Offsets may be repeated, with a cumulative effect.
 
-   A range of lines is indicated by <address1, address2>.  Either of the
+   A range of lines is indicated by &lt;address1, address2&gt;.  Either of the
 addresses may be omitted:
 
-   <address, >	means <address, address>
-   <, address>	means <., address>
-   <,>		means <., .>
+   &lt;address, &gt;	means &lt;address, address&gt;
+   &lt;, address&gt;	means &lt;., address&gt;
+   &lt;,&gt;		means &lt;., .&gt;
 
    Alternatively, ',' can be replaced with ';'.  This has the effect of setting
-the current line to <address1>, just before <address2> is evaluated.
+the current line to &lt;address1&gt;, just before &lt;address2&gt; is evaluated.
    '%' is an alias for '1,$'.
 
 
@@ -95,8 +101,8 @@ expressions:
    ^		matches the beginning of the line.
    $		matches the end of the line.
    .		matches any single character.
-   \<		matches the beginning of a word (LPC identifier).
-   \>		matches the end of a word (LPC identifier).
+   \&lt;		matches the beginning of a word (LPC identifier).
+   \&gt;		matches the end of a word (LPC identifier).
    [string]	matches any single character in the string between the square
 		brackets.  a-z specifies a range of characters, and if the
 		first character following the opening '[' is '^', any character
@@ -268,22 +274,22 @@ RANGE	COMMAND								ABBREV
 	    NAME	ABBREV	DEFAULT	MEANING
 
 	    ignorecase	ic	noic	ignore case in searches.
-	    shiftwidth	sw	4	affects the '<', '>' and 'I'
+	    shiftwidth	sw	4	affects the '&lt;', '&gt;' and 'I'
 					commands.
 	    window	wi	20	specifies the number of lines
 					displayed with the z command.
 
 
 (.,.)	substitute /pattern/replacement/ [g] [count] [flags]		s
-	Replace <pattern> by <replacement> in the specified lines.  If
+	Replace &lt;pattern&gt; by &lt;replacement&gt; in the specified lines.  If
 	the 'g' option is specified, repeat the substitution in each
-	line until all occurrances of <pattern> have been replaced.
-	In <replacement>, \x, where x is a digit in range 1-9, specifies
-	the xth subexpression in <pattern>, which is enclosed by \( \)
-	pairs in <pattern>.  Furthermore, '&' in <replacement> specifies
-	the text that matched <pattern>, and '\n' in <replacement>
+	line until all occurrances of &lt;pattern&gt; have been replaced.
+	In &lt;replacement&gt;, \x, where x is a digit in range 1-9, specifies
+	the xth subexpression in &lt;pattern&gt;, which is enclosed by \( \)
+	pairs in &lt;pattern&gt;.  Furthermore, '&' in &lt;replacement&gt; specifies
+	the text that matched &lt;pattern&gt;, and '\n' in &lt;replacement&gt;
 	specifies a newline, splitting the line in two.  If the symbols
-	'&' and '\' themselves are desired in <replacement>, they should
+	'&' and '\' themselves are desired in &lt;replacement&gt;, they should
 	be prefixed by '\'.  All parameters are optional. 'substitute'
 	by itself will repeat the previous substitution.
 
@@ -307,7 +313,7 @@ RANGE	COMMAND								ABBREV
 	occurred that prevented the main buffer from containing an exact
 	image of the file that is being edited.
 
-(1,$)	write >> [file]							w>>
+(1,$)	write &gt;&gt; [file]							w&gt;&gt;
 	This variant of write appends to a file, instead of overwriting
 	it.
 
@@ -340,11 +346,11 @@ RANGE	COMMAND								ABBREV
 	    -	show specified line at bottom of page
 
 
-(.,.)	< [count] [flags]
+(.,.)	&lt; [count] [flags]
 	Leftshift the specified lines the number of spaces given by the
 	'shiftwidth' variable, which can be changed by the 'set' command.
 
-(.,.)	> [count] [flags]
+(.,.)	&gt; [count] [flags]
 	Rightshift the specified lines the number of spaces given by the
 	'shiftwidth' variable, which can be changed by the 'set' command.
 
@@ -356,3 +362,4 @@ RANGE	COMMAND								ABBREV
 	LPC code.  The number of spaces used for indentation is given by
 	the 'shiftwidth' variable, which can be changed by the 'set'
 	command.
+</pre>
