@@ -12,9 +12,11 @@ DGD also lets you read and write files. So if you're wondering, "how can I debug
 
 You can find a few other languages with similar properties. Scratch, for instance, is a Smalltalk variant with a visual programming environment that only really works via web browsers and certainly doesn't have a useful text console.
 
-## Timeslices
+## Tasks (a.k.a Timeslices)
 
-DGD normally runs in "timeslices." This is a lot like an evented platform such as Node.js, and a bit like an actor model. You can find similar ideas in Scala and Erlang, for instance.
+DGD normally runs as a series of "tasks," which are also sometimes called "timeslices." This is a lot like an evented platform such as Node.js, and a bit like an actor model. You can find similar ideas in Scala and Erlang, for instance.
+
+(Both names, "tasks" and "timeslices" are used in a variety of ways, making this hard to refer to. Similarly you could call them "events," which is even more ambiguous.)
 
 A timeslice is a short period where code runs in response to some event occurring. The timeslice might run because it's time (e.g. "run every 10 milliseconds") or because network packets have arrived. DGD defines a few "top-level" events, but it's common for other DGD code to schedule more events afterward as well. This, too, is a lot like Node.js and other evented platforms.
 
@@ -60,13 +62,13 @@ That also makes it extremely cheap to keep a copy of all your in-memory objects,
 
 Why is that useful? Keep reading.
 
-## Statedumps
+## Snapshots
 
-DGD is designed around the idea of statedumps. A statedump can be a live backup, where it writes out the contents of its memory and then keeps running. It can also stop the process, so there is now an on-disk backup but no running application.
+DGD is designed around the idea of Snapshots, also known as "statedumps." A snapshot can act as a live backup, where it writes out the contents of its memory and then keeps running. Taking a snapshot is also allowed to stop the process, so there would be an on-disk backup but no running application.
 
 The live backups are powerful in the normal way. Keeping a live backup of your objects in memory is quite difficult in most languages. DGD makes it trivial.
 
-Stopping a process with a fully-current backup makes it very easy to restart the process at exactly the same point, without having to manually write out the objects in use and do a full restart afterward. DGD objects are often written as if they were immortal, with minimal shutdown or startup code, because with statedumps ***they can be***.
+Stopping a process with a fully-current backup makes it very easy to restart the process at exactly the same point, without having to manually write out the objects in use and do a full restart afterward. DGD objects are often written as if they were immortal, with minimal shutdown or startup code, because with snapshots ***they can be***.
 
 Not every DGD application chooses full persistence using this method. But DGD leaves the option open, and it can be very powerful.
 
