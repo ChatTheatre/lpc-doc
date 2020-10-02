@@ -41,7 +41,7 @@ This is one of several documentation sites courtesy of [ChatTheatre](https://cha
 
 ## DGD Resources
 
-* The [LPC Reference Manual](./LPC.html) from DGD - very incomplete
+* The [LPC Reference Manual](https://ChatTheatre.github.io/lpc-doc/LPC.html) from DGD - very incomplete
 
 * For many years, the Phantasmal DGD documentation site was the preferred resource for DGD documentation. You can find [the most recent versions of its source files on GitHub](https://github.com/shentino/phantasmal/tree/master/website/DGD), and ChatTheatre is attempting to adapt its most useful parts to something modern.
 
