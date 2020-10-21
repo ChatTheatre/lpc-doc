@@ -43,6 +43,8 @@ This is one of several documentation sites courtesy of [ChatTheatre](https://cha
 
 * The [LPC Reference Manual](https://ChatTheatre.github.io/lpc-doc/LPC.html) from DGD - very incomplete
 
+* [Self-Conscious DGD](https://noahgibbs.github.io/self_conscious_dgd) is an unfinished book about DGD and DGD's LPC dialect.
+
 * For many years, the Phantasmal DGD documentation site was the preferred resource for DGD documentation. You can find [the most recent versions of its source files on GitHub](https://github.com/shentino/phantasmal/tree/master/website/DGD), and ChatTheatre is attempting to adapt its most useful parts to something modern.
 
 * The most comprehensive resource on DGD remains the [DGD email list archive](https://mail.dworkin.nl/pipermail/dgd/). The list operated from August of 1997 until July of 2019. It isn't easy to sort through, but the amount of raw DGD content is unrivalled.
